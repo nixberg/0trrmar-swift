@@ -20,6 +20,7 @@ apps:
     daemon: simple
     environment:
       VAPOR_ENV: production
+    plugs: [network-bind]
 
 package-repositories:
   - type: apt
