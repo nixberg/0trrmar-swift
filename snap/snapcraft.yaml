@@ -17,6 +17,9 @@ apps:
     command: bin/0trrmar
   1cep9ug:
     command: bin/1cep9ug
+    daemon: simple
+    environment:
+      VAPOR_ENV: production
 
 package-repositories:
   - type: apt
