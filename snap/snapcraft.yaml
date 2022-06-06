@@ -14,8 +14,10 @@ architectures:
   - build-on: armhf
 
 apps:
-  hello:
+  0trrmar:
     command: bin/0trrmar
+  1cep9ug:
+    command: bin/1cep9ug
 
 package-repositories:
   - type: apt
@@ -33,6 +35,6 @@ parts:
     override-build: |
       set -euo pipefail; IFS=$'\n\t' 
       swift build --configuration=release --static-swift-stdlib
-      mkdir -p $CRAFT_PART_INSTALL/bin/
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin/
       bin_path=`swift build --configuration=release --show-bin-path`
-      cp `find $bin_path -maxdepth 1 -type f -executable` $CRAFT_PART_INSTALL/bin/
+      cp `find $bin_path -maxdepth 1 -type f -executable` $SNAPCRAFT_PART_INSTALL/bin/
