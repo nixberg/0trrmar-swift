@@ -1,5 +1,5 @@
 name: 0trrmar
-base: core22
+base: core20
 version: '0'
 summary: Single-line elevator pitch
 description: |
@@ -11,21 +11,22 @@ confinement: strict
 architectures:
   - build-on: amd64
   - build-on: arm64
+  - build-on: armhf
 
 apps:
   hello:
     command: bin/0trrmar
 
 package-repositories:
-  - formats: [deb]
-    key-id: 8B5E181F3D689E73E16C3014EAAFEE64EF92AAA0
-    type: apt
+  - type: apt
+    formats: [deb]
     url: https://archive.swiftlang.xyz/ubuntu/
-    suites: [jammy]
+    key-id: 8B5E181F3D689E73E16C3014EAAFEE64EF92AAA0
+    suites: [focal]
     components: [main]
 
 parts:
-  0trrmar:
+  swift-package:
     plugin: nil
     build-packages: [swiftlang]
     source: .
@@ -34,4 +35,4 @@ parts:
       swift build --configuration=release --static-swift-stdlib
       mkdir -p $CRAFT_PART_INSTALL/bin/
       bin_path=`swift build --configuration=release --show-bin-path`
-      cp $bin_path/$CRAFT_PART_NAME $CRAFT_PART_INSTALL/bin/
+      cp `find $bin_path -maxdepth 1 -type f -executable` $CRAFT_PART_INSTALL/bin/
